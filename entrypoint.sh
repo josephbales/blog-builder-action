@@ -6,6 +6,7 @@ set -u # script fails if trying to access to an undefined variable
 
 echo "Starts"
 
+ls
 
 echo "Installing gems"
 bundle config path vendor/bundle
