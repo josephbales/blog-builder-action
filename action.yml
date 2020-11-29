@@ -1,8 +1,42 @@
-name: 'BJPTOR'
-description: 'A GitHub Action to build Jekyll sites'
+name: 'Build and Push Jekyll Site'
+description: 'Build Jekyll blog and push site to another repository'
+inputs:
+  source-directory:
+    description: 'Source directory from the origin directory'
+    required: true
+  destination-github-username:
+    description: 'Name of the destination username/organization'
+    required: true
+  destination-repository-name:
+    description: 'Destination repository'
+    required: true
+  user-email:
+    description: 'Email for the git commit'
+    required: true
+  destination-repository-username:
+    description: 'Username/organization for the destination repository'
+    required: true
+  target-branch:
+    description: 'Set target branch name for the destination repository'
+    required: true
+  deployment-files-dir:
+    description: '[Optional] Any additiona files needed to copy to deployment directory'
+    required: false
+  commit-message:
+    description: '[Optional] Set a commit message'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.source-directory }}
+    - ${{ inputs.destination-github-username }}
+    - ${{ inputs.destination-repository-name }}
+    - ${{ inputs.user-email }}
+    - ${{ inputs.destination-repository-username }}
+    - ${{ inputs.target-branch }}
+    - ${{ inputs.deployment-files-dir }}
+    - ${{ inputs.commit-message }}
 branding:
-  icon: 'grid'
+  icon: 'git-commit'
   color: 'green'
