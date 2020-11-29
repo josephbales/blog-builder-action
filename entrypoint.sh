@@ -26,7 +26,7 @@ COMMIT_MESSAGE="$8"
 
 if [ -z "$DESTINATION_REPOSITORY_USERNAME" ]
 then
-  DESTINATION_REPOSITORY_USERNAME="$DESTINATION_GITHUB_USERNAME"
+	DESTINATION_REPOSITORY_USERNAME="$DESTINATION_GITHUB_USERNAME"
 fi
 
 CLONE_DIR=$(mktemp -d)
@@ -46,7 +46,7 @@ ls -la "$CLONE_DIR"
 # copy all files from the _site dir to the clone_dir
 echo "Copying contents to git repo"
 cp -r "$SOURCE_DIRECTORY"/* "$CLONE_DIR"
-if [ -z "$DEPLOYMENT_FILES_DIR" ]
+if [ -n "$DEPLOYMENT_FILES_DIR" ]
 then
 	cp -r "$DEPLOYMENT_FILES_DIR"/* "$CLONE_DIR"
 fi
@@ -56,8 +56,10 @@ ls -la
 # then do git add/commit/push process
 echo "Adding git commit"
 
-ORIGIN_COMMIT="https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
-COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
+if [ -z "$COMMIT_MESSAGE" ]
+then
+	COMMIT_MESSAGE="Committed from: https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+fi
 
 git add .
 git status
