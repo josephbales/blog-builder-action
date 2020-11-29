@@ -23,8 +23,11 @@ The Username/Organization for the destination repository, if different from `des
 ### `target-branch` (argument)
 The branch name for the destination repository.
 
+### `deployment-files-dir` (argument)
+Optional: A folder will additional files to copy to the clone directory.
+
 ### `commit-message` (argument)
-The commit message to be used in the output repository. Optional and defaults to "Update from $REPOSITORY_URL@commit".
+Optional: The commit message to be used in the output repository. Optional and defaults to "Update from $REPOSITORY_URL@commit".
 
 The string `ORIGIN_COMMIT` is replaced by `$REPOSITORY_URL@commit`.
 
