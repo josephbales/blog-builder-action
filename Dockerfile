@@ -1,4 +1,4 @@
-FROM ruby:slim
+FROM ruby:3.2-alpine
 
 LABEL repository="https://github.com/josephbales/blog-builder-action"
 LABEL homepage="https://github.com/josephbales/blog-builder-action"
